@@ -1,0 +1,54 @@
+```{r}
+clean_cake_recipe %>% 
+    view()
+```
+
+Which cake has the most cocoa in it?
+
+```{r}
+clean_cake_recipe %>% 
+    filter(ingredient == "Cocoa") %>% 
+    top_n(1, value)
+    
+```
+
+For sponge cake, how many cups of ingredients are used in total?
+```{r}
+clean_cake_recipe %>% 
+    filter(Cake == "Sponge", measure == "cup") %>% 
+    summarise(total_cups_ingredients = sum(value))
+```
+
+How many ingredients are measured in teaspoons?
+```{r}
+clean_cake_recipe %>% 
+    filter(measure == "teaspoon") %>% 
+    group_by(ingredient) %>% 
+    summarise(sum(value)) %>% 
+    count
+```
+
+Which cake has the most unique ingredients?
+```{r}
+unique_ingredients <- clean_cake_recipe %>% 
+    filter(value > 0) %>%
+    count(ingredient) %>% 
+    filter(n == 1) %>% 
+    select(ingredient)
+
+class(unique_ingredients) <- as.vector(unique_ingredients)
+
+clean_cake_recipe %>%
+    filter(value > 0, ingredient %in% unique_ingredients$ingredient) %>%
+   count(Cake) %>% 
+top_n(1)    %>% 
+    view()
+
+```
+Which ingredients are used only once?
+
+```{r}
+unique_ingredients$ingredient
+```
+
+

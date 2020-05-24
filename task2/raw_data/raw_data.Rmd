@@ -1,0 +1,23 @@
+
+```{r}
+library(readr)
+raw_ingredients_conversion <- read_csv("cake/cake_ingredient_code.csv")
+raw_cake_recipe <- read_csv("cake/cake-ingredients-1961.csv")
+
+```
+
+
+
+
+1.2.1 Some cleaning hints
+This data isn’t in tidy format. You’ll need to figure out how to get it into our classic data format.
+We want the actual ingredient names, not the abbreviations. You’ll find these in cake_ingredient_code.csv
+1.2.2 Analysis questions
+Which cake has the most cocoa in it?
+
+For sponge cake, how many cups of ingredients are used in total?
+
+How many ingredients are measured in teaspoons?
+
+Which cake has the most unique ingredients?
+Which ingredients are used only once?

@@ -1,0 +1,55 @@
+For each question where we ask for bird names, give the bird’s common name, scientific name and species abbreviation.
+
+```{r}
+library(tidyverse)
+```
+
+Which bird had the most individual sightings?
+
+```{r}
+full_data %>% 
+    count(species_abbreviation) %>% 
+    top_n(1)
+  
+```
+
+Which bird had the highest total count?
+```{r}
+full_data %>% 
+ group_by(species_abbreviation) %>% 
+    summarise(sum(count)) %>% 
+    top_n(1)
+```
+
+Which bird had the highest total count above a latitude of -30?
+```{r}
+full_data %>% 
+    filter(lat > -30) %>% 
+ group_by(species_abbreviation) %>% 
+    summarise(sum(count)) %>% 
+    top_n(1)
+```
+
+How many different types of birds were only ever seen in groups of 1?
+
+```{r}
+
+
+        full_data %>% 
+    filter(count < 2)  %>% 
+        select(species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase, species_abbreviation) %>% 
+        distinct() %>% 
+    arrange(species_abbreviation) %>% 
+    count()
+
+```
+
+How many penguins were seen? (Hint: there are many types of penguin)
+
+```{r}
+       full_data %>% 
+    filter(str_detect( species_common_name_taxon_age_sex_plumage_phase, "penguin")) %>% 
+    summarise(sum(count,na.rm = TRUE))
+
+```
+

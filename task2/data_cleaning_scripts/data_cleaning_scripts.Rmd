@@ -1,0 +1,27 @@
+
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+We want the actual ingredient names, not the abbreviations. You’ll find these in cake_ingredient_code.csv
+
+
+```{r}
+raw_cake_recipe
+raw_ingredients_conversion
+```
+
+
+
+```{r}
+longer_cake_recipe <- raw_cake_recipe %>% 
+    pivot_longer(cols = AE:ZH) %>% 
+    view()
+
+  clean_cake_recipe <- left_join(longer_cake_recipe , raw_ingredients_conversion, by = c("name" = "code")) %>%
+      select(-name) %>% 
+      mutate(value = replace_na(value, 0)) %>% 
+      view()
+```
