@@ -1,6 +1,0 @@
-```{r}
-library(readr)
-raw_data <-read_rds("raw_data/decathlon.rds")
-```
-
-
