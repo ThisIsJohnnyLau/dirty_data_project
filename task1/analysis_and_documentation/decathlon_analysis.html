@@ -2813,11 +2813,13 @@ div.tocify {
 
 
 <p><b>Loading libraries and cleaned data</b></p>
-<pre class="r"><code>library(tidyverse)
+<pre class="r"><code>library(readr)
 library(here)
+library(janitor)
+library(tidyverse)
 
-decathlon_tbl &lt;- here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
-    read_rds()</code></pre>
+decathlon_tbl &lt;-
+  read_rds(here(&quot;clean_data/clean_data.rds&quot;))</code></pre>
 <p><b>Finding the longest long jump in the data</b></p>
 <pre class="r"><code>decathlon_tbl %&gt;%
     group_by(event) %&gt;% 

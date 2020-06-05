@@ -17,15 +17,24 @@ knitr::opts_chunk$set(echo = TRUE)
 <b>Loading libraries and cleaned data</b>
 
 ```{r message=FALSE}
-library(tidyverse)
-library(here)
 
-decathlon_tbl <- here("clean_data/clean_data.rds") %>%
-    read_rds()
+library(readr)
+library(here)
+library(janitor)
+library(tidyverse)
 
 ```
 
 
+<b>Loading cleaned data</b>
+
+```{r message=FALSE}
+
+decathlon_tbl <-
+here("clean_data/clean_data.rds") %>% 
+    read_rds()
+
+```
 <b>Finding the longest long jump in the data</b>
 ```{r}
 decathlon_tbl %>%
