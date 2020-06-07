@@ -1,55 +1,81 @@
-For each question where we ask for bird names, give the bird’s common name, scientific name and species abbreviation.
+---
+title: "Task 3 Analysis"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
+library(here)
+full_data <-
+  read_csv(here("clean_data/birds_clean.csv"))
 ```
 
-Which bird had the most individual sightings?
+Finding the bird with the most individual sightings
 
 ```{r}
-full_data %>% 
+highest_individual_sightings <- full_data %>% 
     count(species_abbreviation) %>% 
     top_n(1)
+
+  highest_individual_sightings2 <- left_join(highest_individual_sightings, full_data, by = "species_abbreviation")
+  
+  highest_individual_sightings2 %>% 
+    select(n, species_abbreviation, species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase) %>% 
+    head(1)
+
   
 ```
 
-Which bird had the highest total count?
-```{r}
-full_data %>% 
+Finding the bird with the highest total count?
+```{r message=FALSE, warning=FALSE}
+highest_total_count <- full_data %>% 
  group_by(species_abbreviation) %>% 
     summarise(sum(count)) %>% 
     top_n(1)
+
+  highest_total_count2 <- left_join(highest_total_count, full_data, by = "species_abbreviation")
+  
+  highest_total_count2 %>% 
+    select("sum(count)", species_abbreviation, species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase) %>%
+    head(1)
 ```
 
-Which bird had the highest total count above a latitude of -30?
-```{r}
-full_data %>% 
+Finding bird with the highest total count above a latitude of -30?
+```{r message=FALSE}
+highest_total_count_above_lat_30 <- full_data %>% 
     filter(lat > -30) %>% 
  group_by(species_abbreviation) %>% 
     summarise(sum(count)) %>% 
     top_n(1)
+
+
+  highest_total_count_above_lat_30_again <- left_join(highest_total_count_above_lat_30, full_data, by = "species_abbreviation")
+  
+  highest_total_count_above_lat_30_again %>% 
+    select("sum(count)", species_abbreviation, species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase) %>%
+    head(1)
 ```
 
 How many different types of birds were only ever seen in groups of 1?
 
 ```{r}
-
-
-        full_data %>% 
+full_data %>% 
     filter(count < 2)  %>% 
-        select(species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase, species_abbreviation) %>% 
+        select(species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase, species_abbreviation) %>%
         distinct() %>% 
     arrange(species_abbreviation) %>% 
     count()
-
 ```
 
-How many penguins were seen? (Hint: there are many types of penguin)
+How many penguins were seen? (N.B. there are many types of penguin)
 
 ```{r}
-       full_data %>% 
+full_data %>% 
     filter(str_detect( species_common_name_taxon_age_sex_plumage_phase, "penguin")) %>% 
     summarise(sum(count,na.rm = TRUE))
-
 ```
 

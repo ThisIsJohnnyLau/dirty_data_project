@@ -1,5 +1,5 @@
 ---
-title: "Task 3"
+title: "Task 3 Documentation"
 output:
   html_document:
     df_print: paged
@@ -11,7 +11,6 @@ output:
 # Fix:  Use readxl package
 
 library(readxl)
-library(here)
 
 
 # Hurdle: multiple sheets in source data
@@ -31,12 +30,13 @@ read_excel_allsheets <-
 
 ```{r}
 # Use function to read any multi-sheet Excel file
-raw_data <- read_excel_allsheets((here("raw_data/seabirds.xls")))
+library(here)
+raw_data <- read_excel_allsheets(here("raw_data/seabirds.xls"))
+
 ```
 
 
 ```{r}
-
 # Hurdle: Need to clean data and names later as required
 # Fix: Load dplyr and janitor
 library(tidyverse)
@@ -45,7 +45,6 @@ library(janitor)
 
 ```{r}
 raw_data
-
 ```
 
 raw_data is tibble comprising of four columns:
@@ -99,7 +98,6 @@ Plumage phase info to remove:
 5 = white
 
 ```{r}
-
 full_data$species_abbreviation <- full_data$species_abbreviation %>% 
     str_replace_all(" PL[1-5]", "") %>% 
     str_replace_all(" AD", "") %>%
