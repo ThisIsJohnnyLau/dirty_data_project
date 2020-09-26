@@ -41,13 +41,17 @@ This project centres around cleaning six dirty datasets:</br>
 
 ## Format
 
-Each solution will include:</br>
-• R project (`.Rproj`)</br>
+Each solution include:</br>
 • Cleaning script</br>
 • Commentary, assumptions and process</br>
 • Answers to questions</br>
 
+## Required libraries
 
+• here 
+• janitor 
+• readr 
+• tidyverse
 
 ## Folder structure 
 
