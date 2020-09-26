@@ -1,14 +1,3 @@
----
-title: "Dirty Data Project"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    number_sections: true
-    df_print: paged
-  pdf_document: default
----
-
 # Overview
 
 '80% of time in data science and analysis is spent data cleaning'

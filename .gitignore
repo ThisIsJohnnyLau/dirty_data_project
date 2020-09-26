@@ -1,22 +1,4 @@
 
-# Created by https://www.gitignore.io/api/r,linux,windows
-# Edit at https://www.gitignore.io/?templates=r,linux,windows
-
-### Linux ###
-*~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-
 ### R ###
 # History files
 .Rhistory
@@ -24,10 +6,21 @@
 
 # Session Data files
 .RData
-.RDataTmp
 
 # User-specific files
 .Ruserdata
+*.Rproj
+
+# Notebooks
+*.Rmd
+*.nb.html
+
+# Dev folder
+dev/
+
+# Shiny
+rsconnect/
+
 
 # Example code in package build process
 *-Ex.R
@@ -55,6 +48,9 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+# R Environment Variables
+.Renviron
 
 ### R.Bookdown Stack ###
 # R package: bookdown caching files
@@ -86,4 +82,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/r,linux,windows
+# End of https://www.toptal.com/developers/gitignore/api/windows,r
