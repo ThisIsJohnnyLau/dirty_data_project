@@ -12,7 +12,8 @@
 *.Rproj
 
 # Notebooks
-*.nb.html
+*.Rmd
+*.html
 
 # Dev folder
 dev/
