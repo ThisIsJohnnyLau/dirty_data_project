@@ -13,7 +13,6 @@
 
 # Notebooks
 *.Rmd
-*.html
 
 # Dev folder
 dev/
