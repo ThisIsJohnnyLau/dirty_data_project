@@ -1,0 +1,64 @@
+---
+title: "Cake Recipe Analysis"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r message=FALSE, warning=FALSE}
+#loading libraries
+library(tidyverse)
+library(here)
+library(readr)
+
+# loading in cleaned data
+clean_cake_recipe <-
+    here("clean_data/cake_recipes.csv") %>% 
+    read_csv()
+
+
+```
+
+# Finding cake with the most Cocoa
+
+```{r}
+clean_cake_recipe %>% 
+    filter(ingredient == "Cocoa") %>% 
+    top_n(1, value)
+    
+```
+
+# Finding number of cups of ingredients used in total for Sponge cake
+```{r}
+clean_cake_recipe %>% 
+    filter(cake == "Sponge", measure == "cup") %>% 
+    summarise(total_cups_ingredients = sum(value))
+```
+
+# Finding number of ingredients measured in teaspoons
+```{r}
+clean_cake_recipe %>% 
+    filter(measure == "teaspoon") %>% 
+    summarise(ingredients_with_tsp = n_distinct(ingredient))
+```
+
+# Finding cake with most the unique ingredients
+```{r}
+clean_cake_recipe %>%
+  group_by(cake) %>%
+  summarise(n_ingredients = n()) %>%
+  top_n(1)
+```
+
+
+# Finding ingredients that are only used once
+```{r}
+clean_cake_recipe %>%
+  group_by(ingredient) %>%
+  summarise(n_cakes = n()) %>% 
+  filter(n_cakes == 1)
+```
+
+
