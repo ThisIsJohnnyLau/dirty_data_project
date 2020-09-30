@@ -32,7 +32,7 @@ This includes:</br>
 ## Tasks
 
 This project centres around cleaning six dirty datasets:</br>
-• Task 1 - Decathlon Events</br>
+• Task 1 - Decathlon Events[(Folder)](https://github.com/ThisIsJohnnyLau/dirty_data_project/tree/master/task1)[Analysis]()</br>
 • Task 2 - Cake Ingredients</br>
 • Task 3 - Seabirds Spottings</br>
 • Task 4 - Sweeties Survey</br>
@@ -41,17 +41,17 @@ This project centres around cleaning six dirty datasets:</br>
 
 ## Format
 
-Each solution include:</br>
+Each solution includes:</br>
 • Cleaning script</br>
 • Commentary, assumptions and process</br>
 • Answers to questions</br>
 
 ## Required libraries
 
-• here 
-• janitor 
-• readr 
-• tidyverse
+• here</br> 
+• janitor</br> 
+• readr</br> 
+• tidyverse</br>
 
 ## Folder structure 
 
