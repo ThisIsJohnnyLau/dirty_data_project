@@ -1,0 +1,66 @@
+---
+title: "Task 6 Analysis - Dog Survey"
+output: html_document
+---
+
+## Loading libraries and cleaned data
+```{r}
+library(tidyverse)
+library(here)
+library(readr)
+
+dogs <- read_csv(here("clean_data/dog_survey_clean.csv"))
+```
+
+### Question 1
+The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.
+
+```{r}
+dogs %>%
+  filter(str_detect(email, ".com$")) %>%
+      nrow()
+```
+
+
+### Question 2
+What’s the average amount spent on dog food for each dog size.
+
+```{r}
+dogs %>%
+  group_by(dog_size) %>%
+    summarize(avg_spent = mean(amount_spent_on_dog_food, na.rm = TRUE))
+```
+
+### Question 3
+For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?
+
+```{r}
+dogs %>%
+  mutate(first_name_letter = substr(last_name, 1, 1)) %>%
+  filter(first_name_letter >= "N")
+```
+
+
+### Question 4
+The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?
+
+```{r}
+av_hum_age_per_gender <- dogs %>%
+  mutate(human_age = dog_age / 6) %>%
+  group_by(dog_gender) %>%
+  summarize(avg_hum_age = mean(human_age, na.rm = TRUE))
+
+av_hum_age_per_gender
+```
+
+### Question 5
+Create a plot of results of question 4.
+
+```{r}
+av_hum_age_per_gender %>% 
+    ggplot() +
+    aes(x = dog_gender, y = avg_hum_age) +
+    geom_bar(stat = "identity")
+```
+
+

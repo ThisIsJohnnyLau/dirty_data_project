@@ -70,12 +70,15 @@ dogs_3 <- dogs_2 %>%
 dogs_4 <- dogs_3 %>%
     filter(nchar(dog_gender) == 1) %>%
     mutate(amount_spent_on_dog_food = abs(as.numeric(amount_spent_on_dog_food))) %>%
-    mutate(dog_age = as.numeric(dog_age))
+    mutate(dog_age = as.numeric(dog_age)) %>% 
+    select(-id)
+
+# Removing rownames
+rownames(dogs_4) <- c()
 
 
-
-# writing data to clean csv
-write.csv(dogs_4, "clean_data/dog_survey_clean.csv")
+# Writing data to clean csv
+write.csv(dogs_4, "clean_data/dog_survey_clean.csv",row.names = FALSE)
     
 # clearing objects from enivornment
 rm(list=ls())
