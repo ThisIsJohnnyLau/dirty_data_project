@@ -197,7 +197,7 @@ candy_combined_clean <-
 
 candy_combined_clean <- 
     candy_combined_clean %>%
-    mutate(age = if_else(age > 99, NA_real_, age))
+    mutate(age = if_else(age > 99 | age == 0, NA_real_, age))
 
 
 # Writing to csv

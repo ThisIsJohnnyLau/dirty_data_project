@@ -1,0 +1,117 @@
+---
+title: "Task 4 Candy Data - analysis"
+output:
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: inline
+---
+
+## Loading libraries and cleaned data
+```{r}
+library(tidyverse)
+library(here)
+
+candy <- read_csv(here("clean_data/candy_clean.csv"),
+# specifying data types
+col_types = cols(gender = col_character(), country = col_character()))
+```
+
+### Question 1
+What is the total number of candy ratings given across the three years?
+
+```{r}
+candy %>%
+# filtering out NAs
+  filter(!is.na(rating)) %>%
+  nrow()
+```
+
+### Question 2
+What was the average age of people who are going out trick or treating and the average age of people not going trick or treating?
+
+```{r}
+candy %>%
+  group_by(going_out) %>%
+# Rounding to whole years
+  summarise(avg_age = round(mean(age, na.rm = TRUE))) %>%
+# Yes first
+    arrange(desc(going_out))
+
+```
+
+
+### Question 3
+For each of joy, despair and meh, which candy bar recieved these ratings the most?
+
+```{r}
+candy %>%
+# Filtering out NAs
+  filter(!is.na(rating)) %>%
+  group_by(rating, candy) %>%
+  summarise(
+    count = n()
+  ) %>%
+  filter(count == max(count))
+```
+
+### Question 4
+How many people rated Starburst as despair?
+
+```{r}
+candy %>%
+  filter(candy == "starburst") %>%
+  filter(rating == "despair") %>%
+  summarise(id_count = n_distinct(person_id))
+```
+
+
+For the next two questions, count despair as -1, joy as +1 and meh as 0.
+
+```{r}
+candy <-
+  candy %>%
+  mutate(rating_numeric = recode(rating,
+                                 joy = 1,
+                                 despair = -1,
+                                 meh = 0))
+```
+
+### Question 5
+What was the most popular candy bar by this rating system for each gender in the dataset?
+
+```{r}
+candy %>%
+  group_by(gender, candy) %>%
+  summarise(
+    avg_rating = mean(rating_numeric, na.rm = TRUE)
+  ) %>%
+  filter(avg_rating == max(avg_rating))
+```
+
+### Question 6
+What was the most popular candy bar in each year?
+
+```{r}
+candy %>%
+  group_by(year, candy) %>%
+  summarise(avg_rating = mean(rating_numeric, na.rm = TRUE)) %>%
+  filter(avg_rating == max(avg_rating))
+```
+
+
+### Question 7
+What was the most popular candy bar by this rating for people in US, Canada, UK and all other countries?
+
+
+```{r}
+candy %>%
+  mutate(country = if_else(country %in% c("united states",
+                                          "canada",
+                                          "united kingdom"),
+                           country, "other")) %>%
+  group_by(country, candy) %>%
+  summarise(avg_rating = mean(rating_numeric, na.rm = TRUE)) %>%
+  filter(avg_rating == max(avg_rating))
+```
+
