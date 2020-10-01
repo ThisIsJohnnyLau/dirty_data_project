@@ -1,5 +1,5 @@
 ---
-title: "Task 4 Candy Data - analysis"
+title: "Task 4 - Candy Data Analysis"
 output:
   html_document:
     df_print: paged

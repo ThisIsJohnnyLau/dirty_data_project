@@ -1,7 +1,9 @@
 ---
-title: "Right Wing Authoritarianism"
-output: html_notebook
-editor_options: 
+title: "Task 5 - Right Wing Authoritarianism Analysis"
+output:
+  html_document:
+    df_print: paged
+editor_options:
   chunk_output_type: inline
 ---
 ## Loading libraries and cleaned data
