@@ -1,0 +1,80 @@
+---
+title: "Right Wing Authoritarianism"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+## Loading libraries and cleaned data
+
+```{r}
+library(tidyverse)
+library(here) 
+
+rwa <- read_csv(here("clean_data/rwa_clean.csv"))
+```
+
+### Question 1
+What's the average RWA score for each gender?
+
+```{r}
+rwa %>%
+  group_by(gender) %>%
+  summarise(mean_rwa = mean(rwa))
+```
+
+
+### Question 2
+What's the average RWA score for left handed people vs. right handed people.
+
+```{r}
+rwa %>%
+  group_by(hand) %>%
+  summarise(mean_rwa = mean(rwa))
+```
+
+
+### Question 3
+What's the average family size for each type of childhood?
+
+```{r}
+rwa %>%
+  group_by(childhood) %>%
+  summarise(mean_family_size = mean(family_size))
+```
+
+### Question 4
+What's the average time to take the test for each education level?
+
+```{r}
+rwa %>%
+  group_by(education) %>%
+  summarise(mean_test_time = mean(test_time))
+```
+
+### Question 5
+
+Whats the average RWA score for people aged
+- Under 18
+- 18 to 25
+- 26 to 40
+- 41 to 60
+- Over 60
+
+```{r}
+rwa %>%
+  mutate(
+    age_group = case_when(
+      age < 18 ~ "Under 18",
+      age < 26 ~ "18 to 25",
+      age < 41 ~ "26 to 40",
+      age < 61 ~ "41 to 60",
+      age > 60 ~ "Over 60"
+    )
+  ) %>%
+  group_by(age_group) %>%
+  summarise(
+    mean_rwa = mean(rwa)
+  )
+```
+
+
