@@ -295,7 +295,7 @@ float: none;
         self._setEventHandlers();
 
         // Binding to the Window load event to make sure the correct scrollTop is calculated
-        $(window).on("load", function() {
+        $(window).load(function() {
 
           // Sets the active TOC item
           self._setActiveElement(true);
@@ -1120,11 +1120,7 @@ float: none;
 
   })); //end of plugin
 </script>
-<script>// Nav markup changed considerably from BS3 -> BS4. To ease migration,
-// bootstraplib has additional JS/CSS which allows us to use BS3-style nav in BS4,
-// so we use BS4 markup only if we're running BS4 or higher without bootstraplib's compatibility shim
-window.BS3_NAV = window.BS3_COMPAT || !!$.fn.tab.Constructor.VERSION.match(/^3\./);
-
+<script>
 
 /**
  * jQuery Plugin: Sticky Tabs
@@ -1140,8 +1136,7 @@ window.BS3_NAV = window.BS3_COMPAT || !!$.fn.tab.Constructor.VERSION.match(/^3\.
     // Show the tab corresponding with the hash in the URL, or the first tab
     var showStuffFromHash = function() {
       var hash = window.location.hash;
-      var selector = hash ? 'a[href="' + hash + '"]' :
-        window.BS3_NAV ? 'li.active > a' : '.nav-link.active';
+      var selector = hash ? 'a[href="' + hash + '"]' : 'li.active > a';
       var $selector = $(selector, context);
       if($selector.data('toggle') === "tab") {
         $selector.tab('show');
@@ -1233,9 +1228,7 @@ window.buildTabsets = function(tocID) {
       var a = $('<a role="tab" data-toggle="tab">' + headingText + '</a>');
       a.attr('href', '#' + id);
       a.attr('aria-controls', id);
-      if (!window.BS3_NAV) a.addClass("nav-link");
       var li = $('<li role="presentation"></li>');
-      if (!window.BS3_NAV) li.addClass("nav-item");
       li.append(a);
       tabList.append(li);
 
@@ -1250,24 +1243,15 @@ window.buildTabsets = function(tocID) {
       tab.detach().appendTo(tabContent);
     });
 
-    // activate tab (note users can add an .active class)
-    var navLinks = window.BS3_NAV ? tabList.children('li') : tabList.find(".nav-link");
-    $(navLinks[activeTab]).tab("show");
-
-    // make sure active content is shown on load
+    // set active tab
+    $(tabList.children('li')[activeTab]).addClass('active');
     var active = $(tabContent.children('div.section')[activeTab]);
     active.addClass('active');
     if (fade)
-      active.addClass(window.BS3_NAV ? 'in' : 'show');
+      active.addClass('in');
 
     if (tabset.hasClass("tabset-sticky"))
       tabset.rmarkdownStickyTabs();
-
-    // .tabset-dropdown is not an official bootstrap thing
-    // but relies on some custom CSS within default.html
-    if (tabset.hasClass("tabset-dropdown")) {
-      $(tabList.children('li')[activeTab]).addClass("active-dropdown-tab");
-    }
   }
 
   // convert section divs with the .tabset class to tabsets
@@ -2571,17 +2555,8 @@ window.onload = function() {
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: .5rem;
-  }
   pre:not([class]) {
     background-color: white;
-  }
-  pre code {
-    background-color: transparent;
   }
 </style>
 <script type="text/javascript">
@@ -2618,7 +2593,6 @@ h5 {
 h6 {
   font-size: 12px;
 }
-
 .table th:not([align]) {
   text-align: left;
 }
@@ -2656,22 +2630,20 @@ summary {
 
 
 
-<!--
-  Note that .tabset-dropdown was initially implemented using Glyphicons, which were dropped
-  in BS4. The idea behind the "equivalent" BS4 CSS derives from how carets are implemented
-  https://github.com/twbs/bootstrap/blob/099860/scss/mixins/_caret.scss#L1
--->
+<!-- tabsets -->
+
 <style type="text/css">
 .tabset-dropdown > .nav-tabs {
   display: inline-table;
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active-dropdown-tab:before {
+.tabset-dropdown > .nav-tabs > li.active:before {
   content: "";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
@@ -2679,7 +2651,7 @@ summary {
   border-right: 1px solid #ddd;
 }
 
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active-dropdown-tab:before {
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
   content: "";
   border: none;
 }
@@ -2692,7 +2664,7 @@ summary {
   border-right: 1px solid #ddd;
 }
 
-.tabset-dropdown > .nav-tabs > li.active-dropdown-tab {
+.tabset-dropdown > .nav-tabs > li.active {
   display: block;
 }
 
@@ -2792,18 +2764,18 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
+<div class="row-fluid">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
 
-<div id="header">
+<div class="fluid-row" id="header">
 
 
 
@@ -2816,10 +2788,11 @@ div.tocify {
 <pre class="r"><code>library(readr)
 library(here)
 library(janitor)
-library(tidyverse)
-
-decathlon_tbl &lt;-
-  read_rds(here(&quot;clean_data/clean_data.rds&quot;))</code></pre>
+library(tidyverse)</code></pre>
+<p><b>Loading cleaned data</b></p>
+<pre class="r"><code>decathlon_tbl &lt;-
+here(&quot;clean_data/clean_data.rds&quot;) %&gt;% 
+    read_rds()</code></pre>
 <p><b>Finding the longest long jump in the data</b></p>
 <pre class="r"><code>decathlon_tbl %&gt;%
     group_by(event) %&gt;% 
@@ -2838,7 +2811,7 @@ decathlon_tbl &lt;-
         summarise(average_100m_time = mean(event_points))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["competition"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["average_100m_time"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Decastar","2":"11.17538","_rn_":"1"},{"1":"OlympicG","2":"10.91571","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["competition"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["average_100m_time"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Decastar","2":"11.17538"},{"1":"OlympicG","2":"10.91571"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p><b>Finding the competitor with the highest total points across both competitions</b></p>
@@ -2873,7 +2846,7 @@ decathlon_tbl &lt;-
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["event_points < 50"],"name":[1],"type":["lgl"],"align":["right"]},{"label":["average_points"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"FALSE","2":"7727.167","_rn_":"1"},{"1":"TRUE","2":"8120.483","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["event_points < 50"],"name":[1],"type":["lgl"],"align":["right"]},{"label":["average_points"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"FALSE","2":"7727.167"},{"1":"TRUE","2":"8120.483"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 
@@ -2906,9 +2879,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-    $(this).siblings().removeClass("active-dropdown-tab");
-    $(this).addClass("active-dropdown-tab");
+    $(this).parent().toggleClass('nav-tabs-open')
   });
 });
 </script>
