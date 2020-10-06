@@ -33,7 +33,7 @@ This includes:</br>
 
 This project centres around cleaning six dirty datasets:</br>
 • Task 1 - Decathlon Events[(Folder)](https://github.com/ThisIsJohnnyLau/dirty_data_project/tree/master/task1)
-[Analysis](http://htmlpreview.github.io/?https://github.com/ThisIsJohnnyLau/dirty_data_project/tree/master/task1/analysis_and_documentation/analysis.html)</br>
+[Analysis](https://github.com/ThisIsJohnnyLau/dirty_data_project/tree/master/task1/analysis_and_documentation/analysis.html?https://github.com/twbs/bootstrap/blob/gh-pages/2.3.2/index.html)</br>
 • Task 2 - Cake Ingredients</br>
 • Task 3 - Seabirds Spottings</br>
 • Task 4 - Sweeties Survey</br>
