@@ -1,4 +1,4 @@
-<body>
+
 ---
 title: "Task 1 - Decathlon Data Analysis"
 output:
@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+<body>
 <b>Loading libraries and cleaned data</b>
 
 ```{r message=FALSE}
