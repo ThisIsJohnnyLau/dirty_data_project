@@ -1,6 +1,6 @@
 # Overview
 
-'80% of time in data science and analysis is spent data cleaning'
+>'80% of time in data science and analysis is spent data cleaning'
 
 This includes:</br>
 • Loading multiple sources of data</br>
