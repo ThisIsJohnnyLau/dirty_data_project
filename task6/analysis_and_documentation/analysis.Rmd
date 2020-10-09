@@ -15,12 +15,29 @@ output:
 library(tidyverse)
 library(here)
 library(readr)
+library(data.table)
 ```
 
 ## Loading in cleaned data
 ```{r}
 dogs <- read_csv(here("clean_data/dog_survey_clean.csv"))
 ```
+
+# Data
+## Raw
+```{r message=FALSE}
+"raw_data/dog_survey.csv" %>%
+    here() %>%
+    read_csv() %>% 
+    data.table()
+```
+
+## Clean data
+```{r message=FALSE}
+dogs %>% 
+    data.table()
+```
+
 
 # Questions
 
