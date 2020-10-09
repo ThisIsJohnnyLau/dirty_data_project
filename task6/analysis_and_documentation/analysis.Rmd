@@ -1,19 +1,30 @@
 ---
 title: "Task 6 Analysis - Dog Survey Data"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    df_print: paged
+  pdf_document: default
 ---
+# Setup
 
-## Loading libraries and cleaned data
-```{r}
+## Loading libraries
+```{r message=FALSE}
 library(tidyverse)
 library(here)
 library(readr)
+```
 
+## Loading in cleaned data
+```{r}
 dogs <- read_csv(here("clean_data/dog_survey_clean.csv"))
 ```
 
-### Question 1
-The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.
+# Questions
+
+## The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.
 
 ```{r}
 dogs %>%
@@ -22,8 +33,7 @@ dogs %>%
 ```
 
 
-### Question 2
-What’s the average amount spent on dog food for each dog size.
+## What’s the average amount spent on dog food for each dog size.
 
 ```{r}
 dogs %>%
@@ -31,8 +41,7 @@ dogs %>%
     summarize(avg_spent = mean(amount_spent_on_dog_food, na.rm = TRUE))
 ```
 
-### Question 3
-For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?
+## For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?
 
 ```{r}
 dogs %>%
@@ -41,8 +50,7 @@ dogs %>%
 ```
 
 
-### Question 4
-The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?
+## The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?
 
 ```{r}
 av_hum_age_per_gender <- dogs %>%
@@ -53,8 +61,7 @@ av_hum_age_per_gender <- dogs %>%
 av_hum_age_per_gender
 ```
 
-### Question 5
-Create a plot of results of question 4.
+## Create a plot of results of question 4.
 
 ```{r}
 av_hum_age_per_gender %>% 
