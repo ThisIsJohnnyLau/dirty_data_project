@@ -2,23 +2,30 @@
 title: "Task 4 - Candy Data Analysis"
 output:
   html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
     df_print: paged
-editor_options:
-  chunk_output_type: inline
+  pdf_document: default
 ---
+# Setup
 
-## Loading libraries and cleaned data
-```{r}
+## Loading libraries
+```{r message=FALSE}
 library(tidyverse)
 library(here)
+```
 
+## Loading in cleaned data
+```{r}
 candy <- read_csv(here("clean_data/candy_clean.csv"),
 # specifying data types
 col_types = cols(gender = col_character(), country = col_character()))
 ```
 
-### Question 1
-What is the total number of candy ratings given across the three years?
+
+# Questions
+## What is the total number of candy ratings given across the three years?
 
 ```{r}
 candy %>%
@@ -27,8 +34,7 @@ candy %>%
   nrow()
 ```
 
-### Question 2
-What was the average age of people who are going out trick or treating and the average age of people not going trick or treating?
+## What was the average age of people who are going out trick or treating and the average age of people not going trick or treating?
 
 ```{r}
 candy %>%
@@ -41,8 +47,7 @@ candy %>%
 ```
 
 
-### Question 3
-For each of joy, despair and meh, which candy bar recieved these ratings the most?
+## For each of joy, despair and meh, which candy bar recieved these ratings the most?
 
 ```{r}
 candy %>%
@@ -55,8 +60,7 @@ candy %>%
   filter(count == max(count))
 ```
 
-### Question 4
-How many people rated Starburst as despair?
+## How many people rated Starburst as despair?
 
 ```{r}
 candy %>%
@@ -66,7 +70,7 @@ candy %>%
 ```
 
 
-For the next two questions, count despair as -1, joy as +1 and meh as 0.
+**For the next two questions, count despair as -1, joy as +1 and meh as 0.**
 
 ```{r}
 candy <-
@@ -77,8 +81,7 @@ candy <-
                                  meh = 0))
 ```
 
-### Question 5
-What was the most popular candy bar by this rating system for each gender in the dataset?
+## What was the most popular candy bar by this rating system for each gender in the dataset?
 
 ```{r}
 candy %>%
@@ -89,8 +92,7 @@ candy %>%
   filter(avg_rating == max(avg_rating))
 ```
 
-### Question 6
-What was the most popular candy bar in each year?
+## What was the most popular candy bar in each year?
 
 ```{r}
 candy %>%
@@ -100,8 +102,7 @@ candy %>%
 ```
 
 
-### Question 7
-What was the most popular candy bar by this rating for people in US, Canada, UK and all other countries?
+## What was the most popular candy bar by this rating for people in US, Canada, UK and all other countries?
 
 
 ```{r}

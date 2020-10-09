@@ -8,15 +8,24 @@ output:
     df_print: paged
   pdf_document: default
 ---
+# Setup
 
+## Loading libraries
 ```{r message=FALSE}
 library(tidyverse)
 library(here)
+```
+
+
+## Loading in cleaned data
+```{r}
 full_data <-
   read_csv(here("clean_data/birds_clean.csv"))
 ```
 
-Finding the bird with the most individual sightings
+# Questions
+
+## Finding the bird with the most individual sightings
 
 ```{r}
 highest_individual_sightings <- full_data %>% 
@@ -32,7 +41,7 @@ highest_individual_sightings <- full_data %>%
   
 ```
 
-Finding the bird with the highest total count?
+## Finding the bird with the highest total count?
 ```{r message=FALSE, warning=FALSE}
 highest_total_count <- full_data %>% 
  group_by(species_abbreviation) %>% 
@@ -46,7 +55,7 @@ highest_total_count <- full_data %>%
     head(1)
 ```
 
-Finding bird with the highest total count above a latitude of -30?
+## Finding bird with the highest total count above a latitude of -30?
 ```{r message=FALSE}
 highest_total_count_above_lat_30 <- full_data %>% 
     filter(lat > -30) %>% 
@@ -62,7 +71,7 @@ highest_total_count_above_lat_30 <- full_data %>%
     head(1)
 ```
 
-How many different types of birds were only ever seen in groups of 1?
+## How many different types of birds were only ever seen in groups of 1?
 
 ```{r}
 full_data %>% 
@@ -73,7 +82,7 @@ full_data %>%
     count()
 ```
 
-How many penguins were seen? (N.B. there are many types of penguin)
+## How many penguins were seen? (N.B. there are many types of penguin)
 
 ```{r}
 full_data %>% 

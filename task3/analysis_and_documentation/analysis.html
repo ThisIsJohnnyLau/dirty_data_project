@@ -2784,11 +2784,34 @@ div.tocify {
 </div>
 
 
+<div id="setup" class="section level1">
+<h1><span class="header-section-number">1</span> Setup</h1>
+<div id="loading-libraries" class="section level2">
+<h2><span class="header-section-number">1.1</span> Loading libraries</h2>
 <pre class="r"><code>library(tidyverse)
-library(here)
-full_data &lt;-
+library(here)</code></pre>
+</div>
+<div id="loading-in-cleaned-data" class="section level2">
+<h2><span class="header-section-number">1.2</span> Loading in cleaned data</h2>
+<pre class="r"><code>full_data &lt;-
   read_csv(here(&quot;clean_data/birds_clean.csv&quot;))</code></pre>
-<p>Finding the bird with the most individual sightings</p>
+<pre><code>## Parsed with column specification:
+## cols(
+##   record_id = col_double(),
+##   date = col_date(format = &quot;&quot;),
+##   species_common_name_taxon_age_sex_plumage_phase = col_character(),
+##   species_scientific_name_taxon_age_sex_plumage_phase = col_character(),
+##   species_abbreviation = col_character(),
+##   count = col_double(),
+##   lat = col_double(),
+##   long = col_double()
+## )</code></pre>
+</div>
+</div>
+<div id="questions" class="section level1">
+<h1><span class="header-section-number">2</span> Questions</h1>
+<div id="finding-the-bird-with-the-most-individual-sightings" class="section level2">
+<h2><span class="header-section-number">2.1</span> Finding the bird with the most individual sightings</h2>
 <pre class="r"><code>highest_individual_sightings &lt;- full_data %&gt;% 
     count(species_abbreviation) %&gt;% 
     top_n(1)</code></pre>
@@ -2803,7 +2826,9 @@ full_data &lt;-
 {"columns":[{"label":["n"],"name":[1],"type":["int"],"align":["right"]},{"label":["species_abbreviation"],"name":[2],"type":["chr"],"align":["left"]},{"label":["species_common_name_taxon_age_sex_plumage_phase"],"name":[3],"type":["chr"],"align":["left"]},{"label":["species_scientific_name_taxon_age_sex_plumage_phase"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"3104","2":"DIOANTEXU PL2","3":"Wandering albatross sensu lato PL2","4":"Diomedea antipodensis / exulans PL2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>Finding the bird with the highest total count?</p>
+</div>
+<div id="finding-the-bird-with-the-highest-total-count" class="section level2">
+<h2><span class="header-section-number">2.2</span> Finding the bird with the highest total count?</h2>
 <pre class="r"><code>highest_total_count &lt;- full_data %&gt;% 
  group_by(species_abbreviation) %&gt;% 
     summarise(sum(count)) %&gt;% 
@@ -2819,7 +2844,9 @@ full_data &lt;-
 {"columns":[{"label":["sum(count)"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["species_abbreviation"],"name":[2],"type":["chr"],"align":["left"]},{"label":["species_common_name_taxon_age_sex_plumage_phase"],"name":[3],"type":["chr"],"align":["left"]},{"label":["species_scientific_name_taxon_age_sex_plumage_phase"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"7732","2":"LARBUL","3":"Black-billed gull","4":"Larus bulleri"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>Finding bird with the highest total count above a latitude of -30?</p>
+</div>
+<div id="finding-bird-with-the-highest-total-count-above-a-latitude-of--30" class="section level2">
+<h2><span class="header-section-number">2.3</span> Finding bird with the highest total count above a latitude of -30?</h2>
 <pre class="r"><code>highest_total_count_above_lat_30 &lt;- full_data %&gt;% 
     filter(lat &gt; -30) %&gt;% 
  group_by(species_abbreviation) %&gt;% 
@@ -2837,7 +2864,9 @@ full_data &lt;-
 {"columns":[{"label":["sum(count)"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["species_abbreviation"],"name":[2],"type":["chr"],"align":["left"]},{"label":["species_common_name_taxon_age_sex_plumage_phase"],"name":[3],"type":["chr"],"align":["left"]},{"label":["species_scientific_name_taxon_age_sex_plumage_phase"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"855","2":"PUFPAC","3":"Wedge-tailed shearwater","4":"Puffinus pacificus"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>How many different types of birds were only ever seen in groups of 1?</p>
+</div>
+<div id="how-many-different-types-of-birds-were-only-ever-seen-in-groups-of-1" class="section level2">
+<h2><span class="header-section-number">2.4</span> How many different types of birds were only ever seen in groups of 1?</h2>
 <pre class="r"><code>full_data %&gt;% 
     filter(count &lt; 2)  %&gt;% 
         select(species_common_name_taxon_age_sex_plumage_phase, species_scientific_name_taxon_age_sex_plumage_phase, species_abbreviation) %&gt;%
@@ -2849,7 +2878,9 @@ full_data &lt;-
 {"columns":[{"label":["n"],"name":[1],"type":["int"],"align":["right"]}],"data":[{"1":"298"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>How many penguins were seen? (N.B. there are many types of penguin)</p>
+</div>
+<div id="how-many-penguins-were-seen-n.b.-there-are-many-types-of-penguin" class="section level2">
+<h2><span class="header-section-number">2.5</span> How many penguins were seen? (N.B. there are many types of penguin)</h2>
 <pre class="r"><code>full_data %&gt;% 
     filter(str_detect( species_common_name_taxon_age_sex_plumage_phase, &quot;penguin&quot;)) %&gt;% 
     summarise(sum(count,na.rm = TRUE))</code></pre>
@@ -2857,6 +2888,8 @@ full_data &lt;-
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["sum(count, na.rm = TRUE)"],"name":[1],"type":["dbl"],"align":["right"]}],"data":[{"1":"154"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
+</div>
+</div>
 </div>
 
 
