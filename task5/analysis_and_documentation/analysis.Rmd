@@ -2,21 +2,29 @@
 title: "Task 5 - Right Wing Authoritarianism Analysis"
 output:
   html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
     df_print: paged
-editor_options:
-  chunk_output_type: inline
+  pdf_document: default
 ---
-## Loading libraries and cleaned data
+# Setup
 
-```{r}
+## Loading libraries
+```{r message=FALSE}
+
 library(tidyverse)
 library(here) 
+```
 
+## Loading in cleaned data
+```{r}
 rwa <- read_csv(here("clean_data/rwa_clean.csv"))
 ```
 
-### Question 1
-What's the average RWA score for each gender?
+# Questions
+
+## What's the average RWA score for each gender?
 
 ```{r}
 rwa %>%
@@ -25,8 +33,7 @@ rwa %>%
 ```
 
 
-### Question 2
-What's the average RWA score for left handed people vs. right handed people.
+## What's the average RWA score for left handed people vs. right handed people.
 
 ```{r}
 rwa %>%
@@ -35,8 +42,7 @@ rwa %>%
 ```
 
 
-### Question 3
-What's the average family size for each type of childhood?
+## What's the average family size for each type of childhood?
 
 ```{r}
 rwa %>%
@@ -44,8 +50,7 @@ rwa %>%
   summarise(mean_family_size = mean(family_size))
 ```
 
-### Question 4
-What's the average time to take the test for each education level?
+## What's the average time to take the test for each education level?
 
 ```{r}
 rwa %>%
@@ -53,9 +58,7 @@ rwa %>%
   summarise(mean_test_time = mean(test_time))
 ```
 
-### Question 5
-
-Whats the average RWA score for people aged
+## Whats the average RWA score for people aged
 - Under 18
 - 18 to 25
 - 26 to 40
