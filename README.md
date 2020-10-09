@@ -31,14 +31,15 @@ This includes:</br>
 
 ## Tasks
 
-This project centres around cleaning six dirty datasets:</br>
-• Task 1 - Decathlon Events[(Folder)](https://github.com/ThisIsJohnnyLau/dirty_data_project/tree/master/task1)
-[Analysis](https://github.com/ThisIsJohnnyLau/dirty_data_project/tree/master/task1/analysis_and_documentation/analysis.html?https://github.com/twbs/bootstrap/blob/gh-pages/2.3.2/index.html)</br>
-• Task 2 - Cake Ingredients</br>
-• Task 3 - Seabirds Spottings</br>
-• Task 4 - Sweeties Survey</br>
-• Task 5 - Codebook</br>
-• Task 6 - Dogs</br>
+This project centres around cleaning six dirty datasets:  
+[[Folder]](https://github.com/ThisIsJohnnyLau/dirty_data_project)
+  
+• Task 1 - Decathlon Events [[Analysis]](https://thisisjohnnylau.github.io/task_1.html)  
+• Task 2 - Cake Ingredients  [[Analysis]](https://thisisjohnnylau.github.io/task_2.html)  
+• Task 3 - Seabirds Spottings  [[Analysis]](https://thisisjohnnylau.github.io/task_3.html)  
+• Task 4 - Sweeties Survey  [[Analysis]](https://thisisjohnnylau.github.io/task_4.html)  
+• Task 5 - Right Wing Authoritarianism  [[Analysis]](https://thisisjohnnylau.github.io/task_5.html)  
+• Task 6 - Dogs [[Analysis]](https://thisisjohnnylau.github.io/task_6.html)  
 
 ## Format
 
