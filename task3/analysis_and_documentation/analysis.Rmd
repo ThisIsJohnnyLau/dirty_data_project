@@ -2,9 +2,11 @@
 title: "Task 3 - Seabirds Analysis"
 output:
   html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
     df_print: paged
-editor_options:
-  chunk_output_type: inline
+  pdf_document: default
 ---
 
 ```{r message=FALSE}
