@@ -13,8 +13,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Setup
 
-<b>Loading libraries and cleaned data</b>
+## Loading libraries
 
 ```{r message=FALSE}
 
@@ -25,8 +26,7 @@ library(tidyverse)
 
 ```
 
-
-<b>Loading cleaned data</b>
+## Loading cleaned data
 
 ```{r message=FALSE}
 
@@ -35,7 +35,11 @@ here("clean_data/clean_data.rds") %>%
     read_rds()
 
 ```
-<b>Finding the longest long jump in the data</b>
+
+
+# Questions
+
+## Finding the longest long jump in the data
 ```{r}
 decathlon_tbl %>%
     group_by(event) %>% 
@@ -46,7 +50,7 @@ decathlon_tbl %>%
 
 
 
-<b>Finding the average 100m time for each competition</b>
+## Finding the average 100m time for each competition
 ```{r message=FALSE}
 decathlon_tbl %>% 
         filter(event == "100m_sprint") %>%
@@ -54,7 +58,7 @@ decathlon_tbl %>%
         summarise(average_100m_time = mean(event_points))
 ```
 
-<b>Finding the competitor with the highest total points across both competitions</b>
+## Finding the competitor with the highest total points across both competitions
 ```{r}
 decathlon_tbl %>% 
     group_by(competitor) %>%
@@ -64,8 +68,8 @@ decathlon_tbl %>%
     
 ```
 
-<br>
-<b>Finding the shot-put scores for the top three competitors in each competition</b>
+
+## Finding the shot-put scores for the top three competitors in each competition
 ```{r}
 
 decathlon_tbl %>% 
@@ -77,8 +81,8 @@ decathlon_tbl %>%
 
 ```
 
-<br>
-<b>Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds</b>
+
+## Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds
 ```{r}
 
 decathlon_tbl %>% 

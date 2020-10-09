@@ -2784,16 +2784,26 @@ div.tocify {
 </div>
 
 
-<p><b>Loading libraries and cleaned data</b></p>
+<div id="setup" class="section level1">
+<h1><span class="header-section-number">1</span> Setup</h1>
+<div id="loading-libraries" class="section level2">
+<h2><span class="header-section-number">1.1</span> Loading libraries</h2>
 <pre class="r"><code>library(readr)
 library(here)
 library(janitor)
 library(tidyverse)</code></pre>
-<p><b>Loading cleaned data</b></p>
+</div>
+<div id="loading-cleaned-data" class="section level2">
+<h2><span class="header-section-number">1.2</span> Loading cleaned data</h2>
 <pre class="r"><code>decathlon_tbl &lt;-
 here(&quot;clean_data/clean_data.rds&quot;) %&gt;% 
     read_rds()</code></pre>
-<p><b>Finding the longest long jump in the data</b></p>
+</div>
+</div>
+<div id="questions" class="section level1">
+<h1><span class="header-section-number">2</span> Questions</h1>
+<div id="finding-the-longest-long-jump-in-the-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> Finding the longest long jump in the data</h2>
 <pre class="r"><code>decathlon_tbl %&gt;%
     group_by(event) %&gt;% 
     filter(event == &quot;long_jump&quot;,
@@ -2804,7 +2814,9 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 {"columns":[{"label":["competitor"],"name":[1],"type":["chr"],"align":["left"]},{"label":["competition"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["event"],"name":[3],"type":["chr"],"align":["left"]},{"label":["event_points"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Clay","2":"OlympicG","3":"long_jump","4":"7.96"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p><b>Finding the average 100m time for each competition</b></p>
+</div>
+<div id="finding-the-average-100m-time-for-each-competition" class="section level2">
+<h2><span class="header-section-number">2.2</span> Finding the average 100m time for each competition</h2>
 <pre class="r"><code>decathlon_tbl %&gt;% 
         filter(event == &quot;100m_sprint&quot;) %&gt;%
     group_by(competition) %&gt;%
@@ -2814,7 +2826,9 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 {"columns":[{"label":["competition"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["average_100m_time"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Decastar","2":"11.17538"},{"1":"OlympicG","2":"10.91571"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p><b>Finding the competitor with the highest total points across both competitions</b></p>
+</div>
+<div id="finding-the-competitor-with-the-highest-total-points-across-both-competitions" class="section level2">
+<h2><span class="header-section-number">2.3</span> Finding the competitor with the highest total points across both competitions</h2>
 <pre class="r"><code>decathlon_tbl %&gt;% 
     group_by(competitor) %&gt;%
     summarise(total_competition_points = sum(overall_competition_points)) %&gt;% 
@@ -2826,7 +2840,9 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 {"columns":[{"label":["competitor"],"name":[1],"type":["chr"],"align":["left"]},{"label":["total_competition_points"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Sebrle","2":"88930"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p><br> <b>Finding the shot-put scores for the top three competitors in each competition</b></p>
+</div>
+<div id="finding-the-shot-put-scores-for-the-top-three-competitors-in-each-competition" class="section level2">
+<h2><span class="header-section-number">2.4</span> Finding the shot-put scores for the top three competitors in each competition</h2>
 <pre class="r"><code>decathlon_tbl %&gt;% 
     select(-overall_competition_points, -ranking) %&gt;% 
     filter(event == &quot;shot_put&quot;)%&gt;% 
@@ -2838,7 +2854,9 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 {"columns":[{"label":["competitor"],"name":[1],"type":["chr"],"align":["left"]},{"label":["competition"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["event"],"name":[3],"type":["chr"],"align":["left"]},{"label":["event_points"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Sebrle","2":"OlympicG","3":"shot_put","4":"16.36"},{"1":"Karpov","2":"OlympicG","3":"shot_put","4":"15.93"},{"1":"Macey","2":"OlympicG","3":"shot_put","4":"15.73"},{"1":"YURKOV","2":"Decastar","3":"shot_put","4":"15.19"},{"1":"SEBRLE","2":"Decastar","3":"shot_put","4":"14.83"},{"1":"KARPOV","2":"Decastar","3":"shot_put","4":"14.77"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p><br> <b>Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds</b></p>
+</div>
+<div id="calculating-the-average-points-for-competitors-who-ran-the-400m-in-less-than-50-seconds-vs.those-that-ran-400m-in-more-than-50-seconds" class="section level2">
+<h2><span class="header-section-number">2.5</span> Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds</h2>
 <pre class="r"><code>decathlon_tbl %&gt;% 
     filter(event == &quot;400m_sprint&quot;)%&gt;%
     group_by(event_points&lt;50) %&gt;% 
@@ -2848,6 +2866,8 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["event_points < 50"],"name":[1],"type":["lgl"],"align":["right"]},{"label":["average_points"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"FALSE","2":"7727.167"},{"1":"TRUE","2":"8120.483"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
+</div>
+</div>
 </div>
 
 

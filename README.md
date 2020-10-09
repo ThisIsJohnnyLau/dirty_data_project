@@ -12,10 +12,10 @@ This includes:</br>
 
 # Why is data cleaning important?
 
-## *'Garbage in leads to garbage out'*:
 • Estimated $3 trillion US GDP lost in 2016 - IBM</br>
 • 1 in 3 business leaders did not trust the data sources  used in decision-making</br>
 
+> *'Garbage in leads to garbage out'*
 
 ## *You get to know your data*:
 • Understanding data through inital cleaning and exploration</br>
@@ -31,8 +31,7 @@ This includes:</br>
 
 ## Tasks
 
-This project centres around cleaning six dirty datasets:  
-[[Folder]](https://github.com/ThisIsJohnnyLau/dirty_data_project)
+This project centres around cleaning six dirty datasets [[Folder]](https://github.com/ThisIsJohnnyLau/dirty_data_project)
   
 • Task 1 - Decathlon Events [[Analysis]](https://thisisjohnnylau.github.io/task_1.html)  
 • Task 2 - Cake Ingredients  [[Analysis]](https://thisisjohnnylau.github.io/task_2.html)  
