@@ -10,17 +10,34 @@ output:
 ---
 # Setup
 
-## Loading libraries
 ```{r message=FALSE}
 library(tidyverse)
 library(here)
+library(readr)
+library(readxl)
+library(data.table)
 ```
 
 
 ## Loading in cleaned data
-```{r}
+```{r message=FALSE}
 full_data <-
   read_csv(here("clean_data/birds_clean.csv"))
+```
+
+# Data
+## Raw
+```{r message=FALSE}
+"raw_data/seabirds.xls" %>%
+    here() %>%
+    read_excel() %>% 
+    data.table()
+```
+
+## Clean data
+```{r message=FALSE}
+full_data %>% 
+    data.table()
 ```
 
 # Questions
