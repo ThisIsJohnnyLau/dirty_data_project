@@ -12,14 +12,32 @@ output:
 
 ## Loading libraries
 ```{r message=FALSE}
-
 library(tidyverse)
-library(here) 
+library(here)
+library(readr)
+library(data.table)
 ```
 
 ## Loading in cleaned data
-```{r}
-rwa <- read_csv(here("clean_data/rwa_clean.csv"))
+```{r message=FALSE}
+rwa <- "clean_data/rwa_clean.csv" %>%
+    here() %>%
+    read_csv()
+```
+
+# Data
+## Raw
+```{r message=FALSE}
+"raw_data/rwa.csv" %>%
+    here() %>%
+    read_csv() %>% 
+    data.table()
+```
+
+## Clean data
+```{r message=FALSE}
+rwa %>% 
+    data.table()
 ```
 
 # Questions
