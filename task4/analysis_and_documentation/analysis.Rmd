@@ -10,18 +10,38 @@ output:
 ---
 # Setup
 
-## Loading libraries
 ```{r message=FALSE}
 library(tidyverse)
 library(here)
+library(readr)
+library(readxl)
+library(data.table)
 ```
 
 ## Loading in cleaned data
-```{r}
+```{r message=FALSE}
 candy <- read_csv(here("clean_data/candy_clean.csv"),
 # specifying data types
 col_types = cols(gender = col_character(), country = col_character()))
 ```
+
+
+# Data
+## Raw
+```{r message=FALSE}
+# 1/3 for illustration used
+"raw_data/boing-boing-candy-2015.xlsx" %>%
+    here() %>%
+    read_excel() %>% 
+    data.table()
+```
+
+## Clean data
+```{r message=FALSE}
+candy %>% 
+    data.table()
+```
+
 
 
 # Questions
