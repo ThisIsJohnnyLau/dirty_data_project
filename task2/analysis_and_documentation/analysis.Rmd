@@ -8,25 +8,44 @@ output:
     df_print: paged
   pdf_document: default
 ---
-
 # Setup
 
-## Loading libraries
-
-```{r message=FALSE, warning=FALSE}
-#loading libraries
+```{r message=FALSE}
 library(tidyverse)
 library(here)
 library(readr)
+library(data.table)
 ```
 
 ## Loading in cleaned data
 
-```{r}
+```{r message=FALSE}
 # loading in cleaned data
 clean_cake_recipe <-
     here("clean_data/cake_recipes.csv") %>% 
     read_csv()
+```
+
+# Data
+## Raw
+```{r message=FALSE}
+# Recipes
+"raw_data/cake/cake-ingredients-1961.csv" %>%
+    here() %>%
+    read_csv() %>% 
+    data.table()
+
+#  Cake codes
+"raw_data/cake/cake_ingredient_code.csv" %>%
+    here() %>%
+    read_csv() %>% 
+    data.table()
+```
+
+## Clean data
+```{r message=FALSE}
+clean_cake_recipe %>% 
+    data.table()
 ```
 
 # Questions
