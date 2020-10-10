@@ -28,6 +28,7 @@ col_types = cols(gender = col_character(), country = col_character()))
 
 # Data
 ## Raw
+Three seperate Excel files with different formatting
 ```{r message=FALSE}
 # 2015
 "raw_data/boing-boing-candy-2015.xlsx" %>%
@@ -57,7 +58,8 @@ candy %>%
 
 
 # Questions
-## What is the total number of candy ratings given across the three years?
+## Number of ratings
+What is the total number of candy ratings given across the three years?
 
 ```{r}
 candy %>%
@@ -66,7 +68,8 @@ candy %>%
   nrow()
 ```
 
-## What was the average age of people who are going out trick or treating and the average age of people not going trick or treating?
+## Halloween
+What was the average age of people who are going out trick or treating and the average age of people not going trick or treating?
 
 ```{r}
 candy %>%
@@ -79,7 +82,8 @@ candy %>%
 ```
 
 
-## For each of joy, despair and meh, which candy bar recieved these ratings the most?
+## Impressions
+For each of joy, despair and meh, which candy bar recieved these ratings the most?
 
 ```{r}
 candy %>%
@@ -92,7 +96,8 @@ candy %>%
   filter(count == max(count))
 ```
 
-## How many people rated Starburst as despair?
+## Sad Starbursts
+How many people rated Starburst as despair?
 
 ```{r}
 candy %>%
@@ -113,7 +118,8 @@ candy <-
                                  meh = 0))
 ```
 
-## What was the most popular candy bar by this rating system for each gender in the dataset?
+## Overall favourite
+What was the most popular candy bar by this rating system for each gender in the dataset?
 
 ```{r}
 candy %>%
@@ -124,7 +130,8 @@ candy %>%
   filter(avg_rating == max(avg_rating))
 ```
 
-## What was the most popular candy bar in each year?
+## Candy of the year
+What was the most popular candy bar in each year?
 
 ```{r}
 candy %>%
@@ -134,7 +141,8 @@ candy %>%
 ```
 
 
-## What was the most popular candy bar by this rating for people in US, Canada, UK and all other countries?
+## Country favourites
+What was the most popular candy bar by this rating for people in US, Canada, UK and all other countries?
 
 
 ```{r}
