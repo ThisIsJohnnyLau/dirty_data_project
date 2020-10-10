@@ -42,7 +42,8 @@ rwa %>%
 
 # Questions
 
-## What's the average RWA score for each gender?
+## Biological gender
+What's the average RWA score for each gender?
 
 ```{r}
 rwa %>%
@@ -51,7 +52,8 @@ rwa %>%
 ```
 
 
-## What's the average RWA score for left handed people vs. right handed people.
+## Left vs Right
+What's the average RWA score for left handed people vs. right handed people.
 
 ```{r}
 rwa %>%
@@ -60,7 +62,8 @@ rwa %>%
 ```
 
 
-## What's the average family size for each type of childhood?
+## Family size
+What's the average family size for each type of childhood?
 
 ```{r}
 rwa %>%
@@ -68,7 +71,8 @@ rwa %>%
   summarise(mean_family_size = mean(family_size))
 ```
 
-## What's the average time to take the test for each education level?
+## Education
+What's the average time to take the test for each education level?
 
 ```{r}
 rwa %>%
@@ -76,7 +80,8 @@ rwa %>%
   summarise(mean_test_time = mean(test_time))
 ```
 
-## Whats the average RWA score for people aged
+## Age groups
+Whats the average RWA score for people aged
 - Under 18
 - 18 to 25
 - 26 to 40
