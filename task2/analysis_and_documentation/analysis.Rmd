@@ -50,7 +50,8 @@ clean_cake_recipe %>%
 
 # Questions
 
-## Finding cake with the most Cocoa
+## Cocoa
+Finding cake with the most Cocoa
 
 ```{r}
 clean_cake_recipe %>% 
@@ -59,21 +60,24 @@ clean_cake_recipe %>%
     
 ```
 
-## Finding number of cups of ingredients used in total for Sponge cake
+## Sponge cake
+Finding number of cups of ingredients used in total for Sponge cake
 ```{r}
 clean_cake_recipe %>% 
     filter(cake == "Sponge", measure == "cup") %>% 
     summarise(total_cups_ingredients = sum(value))
 ```
 
-## Finding number of ingredients measured in teaspoons
+## Teaspoon measures
+Finding number of ingredients measured in teaspoons
 ```{r}
 clean_cake_recipe %>% 
     filter(measure == "teaspoon") %>% 
     summarise(ingredients_with_tsp = n_distinct(ingredient))
 ```
 
-## Finding cake with most the unique ingredients
+## Special cake
+Finding cake with most the unique ingredients
 ```{r}
 clean_cake_recipe %>%
   group_by(cake) %>%
@@ -82,7 +86,8 @@ clean_cake_recipe %>%
 ```
 
 
-## Finding ingredients that are only used once
+## Fancy ingredients
+Finding ingredients that are only used once
 ```{r}
 clean_cake_recipe %>%
   group_by(ingredient) %>%

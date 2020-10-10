@@ -2836,8 +2836,9 @@ clean_cake_recipe &lt;-
 </div>
 <div id="questions" class="section level1">
 <h1><span class="header-section-number">3</span> Questions</h1>
-<div id="finding-cake-with-the-most-cocoa" class="section level2">
-<h2><span class="header-section-number">3.1</span> Finding cake with the most Cocoa</h2>
+<div id="cocoa" class="section level2">
+<h2><span class="header-section-number">3.1</span> Cocoa</h2>
+<p>Finding cake with the most Cocoa</p>
 <pre class="r"><code>clean_cake_recipe %&gt;% 
     filter(ingredient == &quot;Cocoa&quot;) %&gt;% 
     top_n(1, value)</code></pre>
@@ -2847,8 +2848,9 @@ clean_cake_recipe &lt;-
   </script>
 </div>
 </div>
-<div id="finding-number-of-cups-of-ingredients-used-in-total-for-sponge-cake" class="section level2">
-<h2><span class="header-section-number">3.2</span> Finding number of cups of ingredients used in total for Sponge cake</h2>
+<div id="sponge-cake" class="section level2">
+<h2><span class="header-section-number">3.2</span> Sponge cake</h2>
+<p>Finding number of cups of ingredients used in total for Sponge cake</p>
 <pre class="r"><code>clean_cake_recipe %&gt;% 
     filter(cake == &quot;Sponge&quot;, measure == &quot;cup&quot;) %&gt;% 
     summarise(total_cups_ingredients = sum(value))</code></pre>
@@ -2858,8 +2860,9 @@ clean_cake_recipe &lt;-
   </script>
 </div>
 </div>
-<div id="finding-number-of-ingredients-measured-in-teaspoons" class="section level2">
-<h2><span class="header-section-number">3.3</span> Finding number of ingredients measured in teaspoons</h2>
+<div id="teaspoon-measures" class="section level2">
+<h2><span class="header-section-number">3.3</span> Teaspoon measures</h2>
+<p>Finding number of ingredients measured in teaspoons</p>
 <pre class="r"><code>clean_cake_recipe %&gt;% 
     filter(measure == &quot;teaspoon&quot;) %&gt;% 
     summarise(ingredients_with_tsp = n_distinct(ingredient))</code></pre>
@@ -2869,8 +2872,9 @@ clean_cake_recipe &lt;-
   </script>
 </div>
 </div>
-<div id="finding-cake-with-most-the-unique-ingredients" class="section level2">
-<h2><span class="header-section-number">3.4</span> Finding cake with most the unique ingredients</h2>
+<div id="special-cake" class="section level2">
+<h2><span class="header-section-number">3.4</span> Special cake</h2>
+<p>Finding cake with most the unique ingredients</p>
 <pre class="r"><code>clean_cake_recipe %&gt;%
   group_by(cake) %&gt;%
   summarise(n_ingredients = n()) %&gt;%
@@ -2883,8 +2887,9 @@ clean_cake_recipe &lt;-
   </script>
 </div>
 </div>
-<div id="finding-ingredients-that-are-only-used-once" class="section level2">
-<h2><span class="header-section-number">3.5</span> Finding ingredients that are only used once</h2>
+<div id="fancy-ingredients" class="section level2">
+<h2><span class="header-section-number">3.5</span> Fancy ingredients</h2>
+<p>Finding ingredients that are only used once</p>
 <pre class="r"><code>clean_cake_recipe %&gt;%
   group_by(ingredient) %&gt;%
   summarise(n_cakes = n()) %&gt;% 
