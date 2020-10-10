@@ -2784,10 +2784,21 @@ div.tocify {
 </div>
 
 
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<div id="dirty-dataset" class="section level2">
+<h2><span class="header-section-number">1.1</span> Dirty dataset</h2>
+<p>Decathlon data set comes from FactoMineR package and represents two competitions: Decastar and Olympic Games.</p>
+</div>
+<div id="source" class="section level2">
+<h2><span class="header-section-number">1.2</span> Source</h2>
+<p>Department of statistics and computer science, Agrocampus Rennes</p>
+</div>
+</div>
 <div id="setup" class="section level1">
-<h1><span class="header-section-number">1</span> Setup</h1>
+<h1><span class="header-section-number">2</span> Setup</h1>
 <div id="loading-libraries" class="section level2">
-<h2><span class="header-section-number">1.1</span> Loading libraries</h2>
+<h2><span class="header-section-number">2.1</span> Loading libraries</h2>
 <pre class="r"><code>library(readr)
 library(here)
 library(janitor)
@@ -2795,16 +2806,16 @@ library(tidyverse)
 library(data.table)</code></pre>
 </div>
 <div id="loading-cleaned-data" class="section level2">
-<h2><span class="header-section-number">1.2</span> Loading cleaned data</h2>
+<h2><span class="header-section-number">2.2</span> Loading cleaned data</h2>
 <pre class="r"><code>decathlon &lt;-
 here(&quot;clean_data/clean_data.rds&quot;) %&gt;% 
     read_rds()</code></pre>
 </div>
 </div>
 <div id="data" class="section level1">
-<h1><span class="header-section-number">2</span> Data</h1>
+<h1><span class="header-section-number">3</span> Data</h1>
 <div id="raw" class="section level2">
-<h2><span class="header-section-number">2.1</span> Raw</h2>
+<h2><span class="header-section-number">3.1</span> Raw</h2>
 <pre class="r"><code>&quot;raw_data/decathlon.rds&quot; %&gt;% 
     here() %&gt;%
     read_rds() %&gt;% 
@@ -2816,7 +2827,7 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 </div>
 </div>
 <div id="clean-data" class="section level2">
-<h2><span class="header-section-number">2.2</span> Clean data</h2>
+<h2><span class="header-section-number">3.2</span> Clean data</h2>
 <pre class="r"><code>decathlon %&gt;% 
     data.table()</code></pre>
 <div data-pagedtable="false">
@@ -2827,9 +2838,10 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
 </div>
 </div>
 <div id="questions" class="section level1">
-<h1><span class="header-section-number">3</span> Questions</h1>
-<div id="finding-the-longest-long-jump-in-the-data" class="section level2">
-<h2><span class="header-section-number">3.1</span> Finding the longest long jump in the data</h2>
+<h1><span class="header-section-number">4</span> Questions</h1>
+<div id="long-jump" class="section level2">
+<h2><span class="header-section-number">4.1</span> Long Jump</h2>
+<p>Finding the longest long jump in the data</p>
 <pre class="r"><code>decathlon %&gt;%
     group_by(event) %&gt;% 
     filter(event == &quot;long_jump&quot;,
@@ -2841,20 +2853,22 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
   </script>
 </div>
 </div>
-<div id="finding-the-average-100m-time-for-each-competition" class="section level2">
-<h2><span class="header-section-number">3.2</span> Finding the average 100m time for each competition</h2>
+<div id="m-sprint" class="section level2">
+<h2><span class="header-section-number">4.2</span> 100m sprint</h2>
+<p>Finding the average 100m time for each competition</p>
 <pre class="r"><code>decathlon %&gt;% 
         filter(event == &quot;100m_sprint&quot;) %&gt;%
     group_by(competition) %&gt;%
-        summarise(average_100m_time = mean(event_points))</code></pre>
+        summarise(average_100m_time = round(mean(event_points), 2))</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["competition"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["average_100m_time"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Decastar","2":"11.17538"},{"1":"OlympicG","2":"10.91571"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["competition"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["average_100m_time"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Decastar","2":"11.18"},{"1":"OlympicG","2":"10.92"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
-<div id="finding-the-competitor-with-the-highest-total-points-across-both-competitions" class="section level2">
-<h2><span class="header-section-number">3.3</span> Finding the competitor with the highest total points across both competitions</h2>
+<div id="best-all-rounder" class="section level2">
+<h2><span class="header-section-number">4.3</span> Best all-rounder</h2>
+<p>Finding the competitor with the highest total points across both competitions</p>
 <pre class="r"><code>decathlon %&gt;% 
     group_by(competitor) %&gt;%
     summarise(total_competition_points = sum(overall_competition_points)) %&gt;% 
@@ -2867,8 +2881,9 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
   </script>
 </div>
 </div>
-<div id="finding-the-shot-put-scores-for-the-top-three-competitors-in-each-competition" class="section level2">
-<h2><span class="header-section-number">3.4</span> Finding the shot-put scores for the top three competitors in each competition</h2>
+<div id="shot-put" class="section level2">
+<h2><span class="header-section-number">4.4</span> Shot-put</h2>
+<p>Finding the shot-put scores for the top three competitors in each competition</p>
 <pre class="r"><code>decathlon %&gt;% 
     select(-overall_competition_points, -ranking) %&gt;% 
     filter(event == &quot;shot_put&quot;)%&gt;% 
@@ -2881,16 +2896,18 @@ here(&quot;clean_data/clean_data.rds&quot;) %&gt;%
   </script>
 </div>
 </div>
-<div id="calculating-the-average-points-for-competitors-who-ran-the-400m-in-less-than-50-seconds-vs.those-that-ran-400m-in-more-than-50-seconds" class="section level2">
-<h2><span class="header-section-number">3.5</span> Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds</h2>
+<div id="m-sprint-1" class="section level2">
+<h2><span class="header-section-number">4.5</span> 400m sprint</h2>
+<p>Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds</p>
 <pre class="r"><code>decathlon %&gt;% 
     filter(event == &quot;400m_sprint&quot;)%&gt;%
     group_by(event_points&lt;50) %&gt;% 
-    summarise(average_points = mean(overall_competition_points))</code></pre>
+    summarise(average_points = round(mean(overall_competition_points))) %&gt;%
+  arrange(desc(average_points))</code></pre>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["event_points < 50"],"name":[1],"type":["lgl"],"align":["right"]},{"label":["average_points"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"FALSE","2":"7727.167"},{"1":"TRUE","2":"8120.483"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["event_points < 50"],"name":[1],"type":["lgl"],"align":["right"]},{"label":["average_points"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"TRUE","2":"8120"},{"1":"FALSE","2":"7727"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>

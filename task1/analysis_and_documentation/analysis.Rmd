@@ -2,6 +2,8 @@
 title: "Task 1 - Decathlon Data Analysis"
 output:
   html_document:
+    footer: "footer.html"
+    # css: "bootstrap.css"
     toc: true
     toc_float: true
     number_sections: true
@@ -12,7 +14,15 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# Introduction
 
+## Dirty dataset
+Decathlon data set comes from FactoMineR package and represents two competitions: Decastar and Olympic Games.
+
+## Source
+Department of statistics and computer science, Agrocampus Rennes
+
+  
 # Setup
 
 ## Loading libraries
@@ -36,6 +46,7 @@ here("clean_data/clean_data.rds") %>%
     read_rds()
 ```
 
+  
 # Data
 ## Raw
 ```{r message=FALSE}
@@ -52,9 +63,11 @@ decathlon %>%
     data.table()
 ```
 
+  
 # Questions
 
-## Finding the longest long jump in the data
+## Long Jump
+Finding the longest long jump in the data
 ```{r}
 decathlon %>%
     group_by(event) %>% 
@@ -65,15 +78,17 @@ decathlon %>%
 
 
 
-## Finding the average 100m time for each competition
+## 100m sprint
+Finding the average 100m time for each competition
 ```{r message=FALSE}
 decathlon %>% 
         filter(event == "100m_sprint") %>%
     group_by(competition) %>%
-        summarise(average_100m_time = mean(event_points))
+        summarise(average_100m_time = round(mean(event_points), 2))
 ```
 
-## Finding the competitor with the highest total points across both competitions
+## Best all-rounder
+Finding the competitor with the highest total points across both competitions
 ```{r}
 decathlon %>% 
     group_by(competitor) %>%
@@ -84,7 +99,8 @@ decathlon %>%
 ```
 
 
-## Finding the shot-put scores for the top three competitors in each competition
+## Shot-put
+Finding the shot-put scores for the top three competitors in each competition
 ```{r}
 
 decathlon %>% 
@@ -97,12 +113,14 @@ decathlon %>%
 ```
 
 
-## Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds
+## 400m sprint
+Calculating the average points for competitors who ran the 400m in less than 50 seconds vs. those that ran 400m in more than 50 seconds
 ```{r}
 
 decathlon %>% 
     filter(event == "400m_sprint")%>%
     group_by(event_points<50) %>% 
-    summarise(average_points = mean(overall_competition_points))
+    summarise(average_points = round(mean(overall_competition_points))) %>%
+  arrange(desc(average_points))
 ```
 
