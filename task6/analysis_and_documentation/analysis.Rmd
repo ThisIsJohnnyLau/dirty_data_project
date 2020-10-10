@@ -41,7 +41,8 @@ dogs %>%
 
 # Questions
 
-## The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.
+## E-mails
+The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.
 
 ```{r}
 dogs %>%
@@ -50,7 +51,8 @@ dogs %>%
 ```
 
 
-## What’s the average amount spent on dog food for each dog size.
+## Dog food
+What’s the average amount spent on dog food for each dog size.
 
 ```{r}
 dogs %>%
@@ -58,7 +60,8 @@ dogs %>%
     summarize(avg_spent = mean(amount_spent_on_dog_food, na.rm = TRUE))
 ```
 
-## For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?
+## Owners
+For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?
 
 ```{r}
 dogs %>%
@@ -67,7 +70,8 @@ dogs %>%
 ```
 
 
-## The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?
+## Dog years
+The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?
 
 ```{r}
 av_hum_age_per_gender <- dogs %>%
@@ -78,7 +82,8 @@ av_hum_age_per_gender <- dogs %>%
 av_hum_age_per_gender
 ```
 
-## Create a plot of results of question 4.
+## Graph
+Create a plot of results of question 4.
 
 ```{r}
 av_hum_age_per_gender %>% 

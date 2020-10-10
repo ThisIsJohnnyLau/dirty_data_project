@@ -2837,15 +2837,17 @@ library(data.table)</code></pre>
 </div>
 <div id="questions" class="section level1">
 <h1><span class="header-section-number">3</span> Questions</h1>
-<div id="the-client-only-counts-a-valid-email-address-as-those-ending-in-.com.-how-many-survey-results-have-a-valid-email-address." class="section level2">
-<h2><span class="header-section-number">3.1</span> The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.</h2>
+<div id="e-mails" class="section level2">
+<h2><span class="header-section-number">3.1</span> E-mails</h2>
+<p>The client only counts a valid email address as those ending in ‘.com’. How many survey results have a valid email address.</p>
 <pre class="r"><code>dogs %&gt;%
   filter(str_detect(email, &quot;.com$&quot;)) %&gt;%
       nrow()</code></pre>
 <pre><code>## [1] 173</code></pre>
 </div>
-<div id="whats-the-average-amount-spent-on-dog-food-for-each-dog-size." class="section level2">
-<h2><span class="header-section-number">3.2</span> What’s the average amount spent on dog food for each dog size.</h2>
+<div id="dog-food" class="section level2">
+<h2><span class="header-section-number">3.2</span> Dog food</h2>
+<p>What’s the average amount spent on dog food for each dog size.</p>
 <pre class="r"><code>dogs %&gt;%
   group_by(dog_size) %&gt;%
     summarize(avg_spent = mean(amount_spent_on_dog_food, na.rm = TRUE))</code></pre>
@@ -2856,8 +2858,9 @@ library(data.table)</code></pre>
   </script>
 </div>
 </div>
-<div id="for-owners-whose-surname-starts-with-a-letter-in-the-second-half-of-the-alphabet-n-onwards-what-is-the-average-age-of-their-dog" class="section level2">
-<h2><span class="header-section-number">3.3</span> For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?</h2>
+<div id="owners" class="section level2">
+<h2><span class="header-section-number">3.3</span> Owners</h2>
+<p>For owners whose surname starts with a letter in the second half of the alphabet (N onwards) what is the average age of their dog?</p>
 <pre class="r"><code>dogs %&gt;%
   mutate(first_name_letter = substr(last_name, 1, 1)) %&gt;%
   filter(first_name_letter &gt;= &quot;N&quot;)</code></pre>
@@ -2867,8 +2870,9 @@ library(data.table)</code></pre>
   </script>
 </div>
 </div>
-<div id="the-dog_age-column-is-the-age-in-human-years.-if-the-conversion-is-1-human-year-6-dog-years-then-what-is-the-average-dog-age-for-each-gender" class="section level2">
-<h2><span class="header-section-number">3.4</span> The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?</h2>
+<div id="dog-years" class="section level2">
+<h2><span class="header-section-number">3.4</span> Dog years</h2>
+<p>The ‘dog_age’ column is the age in human years. If the conversion is 1 human year = 6 dog years, then what is the average dog age for each gender?</p>
 <pre class="r"><code>av_hum_age_per_gender &lt;- dogs %&gt;%
   mutate(human_age = dog_age / 6) %&gt;%
   group_by(dog_gender) %&gt;%
@@ -2881,8 +2885,9 @@ library(data.table)</code></pre>
   </script>
 </div>
 </div>
-<div id="create-a-plot-of-results-of-question-4." class="section level2">
-<h2><span class="header-section-number">3.5</span> Create a plot of results of question 4.</h2>
+<div id="graph" class="section level2">
+<h2><span class="header-section-number">3.5</span> Graph</h2>
+<p>Create a plot of results of question 4.</p>
 <pre class="r"><code>av_hum_age_per_gender %&gt;% 
     ggplot() +
     aes(x = dog_gender, y = avg_hum_age) +
